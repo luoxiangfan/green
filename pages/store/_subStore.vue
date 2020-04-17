@@ -1,6 +1,6 @@
 <template>
   <div class="js-site-main site-main">
-    <modal v-if="dialogVisible" :dialogVisible="dialogVisible" :currCouponItem="currCouponItem" @close="dialogVisible = false" />
+    <modal v-if="dialogVisible" :dialogVisible="dialogVisible" :currCouponItem="currCouponItem" @close="dialogVisible = false" @open="dialogVisible = true" />
     <section class="page-title-banner">
       <div class="container store-info-container">
         <div class="row">
@@ -10,7 +10,7 @@
             <div class="store-brand cover-wrap">
               <a class="cover" :href="(storeDetailData.Advertising !== null && storeDetailData.Advertising !== '') ? storeDetailData.Advertising : storeDetailData.webSiteUrl" target="_blank" rel="nofollow">
                 <img
-                  class="img-fluid"
+                  class="img-fluid img-size-all"
                   :src="`https://cannabispromocodes.com${storeDetailData.logo}`"
                   :alt="`${storeDetailData.name} coupons`"
                 />
@@ -66,7 +66,7 @@
                   >
                     <div class="cover">
                       <img
-                        class="img-fluid"
+                        class="img-fluid img-size-all"
                         style="height: 100%;max-width: 100%;max-height: 100%;"
                         :alt="`${item.name} coupons`"
                         :src="`https://cannabispromocodes.com${item.logoUrl}`"
@@ -103,8 +103,7 @@
                 <div class="box d-flex my-2 my-sm-3" data-coupon-type="CODE" v-for="(couponItem, index) in couponList" :key="index">
                   <a
                     class="get_code"
-                    :href="couponItem.link"
-                    data-site="1cbd.uk"
+                    :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                     :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
                     target="_blank"
                     rel="nofollow"
@@ -125,8 +124,7 @@
                   <div class="detail-info">
                     <a
                       class="get_code"
-                      :href="couponItem.link"
-                      data-site="1cbd.uk"
+                      :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                       :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
                       target="_blank"
                       rel="nofollow"
@@ -134,8 +132,7 @@
                     ></a>
                     <a
                       class="get_code"
-                      :href="couponItem.link"
-                      data-site="1cbd.uk"
+                      :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                       :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
                       target="_blank"
                       rel="nofollow"
@@ -150,10 +147,8 @@
                       :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
                       rel="nofollow"
                       class="get_code"
-                      data-id="120705"
-                      data-clipboard-text="save10"
-                      target="_blank"
-                      :href="couponItem.link"
+                      target="_self"
+                      :href="(couponItem.link && (couponItem.link !== '')) ? couponItem.link : couponItem.storeWebSite"
                       v-if="couponItem.couponType === 'CODE'"
                       @click="getDeal(couponItem)"
                     >
@@ -170,11 +165,10 @@
                     </a>
                     <a
                       class="btn-get-deal get_deal"
-                      data-id="439552"
                       :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
                       rel="nofollow"
-                      target="_blank"
-                      :href="couponItem.link"
+                      target="_self"
+                      :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                       v-else
                       @click="getDeal(couponItem)"
                     >GET DEAL</a>
@@ -303,9 +297,18 @@ export default {
         localStorage.removeItem('couponItem')
       }
       this.currCouponItem = item
-      this.dialogVisible = true
+      // this.dialogVisible = true
+      // const url = `/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${item.id}`
+      // this.$router.push(url)
+      // this.dialogVisible = true
       const url = `/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${item.id}`
-      this.$router.push(url)
+      // this.$router.push(url)
+      const newWindow = window.open(url)
+      if (this.$route.query.c && (item.id === Number(this.$route.query.c))) {
+        this.dialogVisible = true
+      } else {
+        newWindow.location = url
+      }
     },
     showCode (item) {
       // console.log(item)
@@ -324,20 +327,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.cover-wrap .cover img {
-  width: auto;
-  height: auto !important;
-}
-.modal-bgc {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgb(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<style>
 </style>

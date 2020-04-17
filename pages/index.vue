@@ -95,7 +95,7 @@
               <div class="cover">
                 <img
                   :src="`https://cannabispromocodes.com${item.logoUrl}`"
-                  class="align-self-center"
+                  class="align-self-center img-size-width"
                   :alt="`${item.name} coupons`"
                   :title="item.name"
                 />
@@ -125,6 +125,7 @@
                 >
                   <div class="cover">
                     <img
+                      class="img-size-width"
                       :src="`https://cannabispromocodes.com${item.storeLogeUrl}`"
                       :alt="`${item.storeName} coupons`"
                     />
@@ -337,21 +338,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.not_show {
-  display: none;
-}
-.show {
-  display: block;
-}
-.section-padding {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
-}
-.cover-wrap .cover img {
-  width: auto;
-}
-.input-group:hover .search-ul {
-  display: block;
-}
+<style>
 </style>

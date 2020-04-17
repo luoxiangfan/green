@@ -90,6 +90,7 @@
                     >
                       <div class="cover">
                         <img
+                          class="img-size-width"
                           :src="`https://cannabispromocodes.com${item.storeLogo}`"
                           :alt="`${item.storeName} coupons`"
                         />
@@ -166,7 +167,7 @@
                 </p>
               </div>
             </div>
-            <div class="row" style="margin: 1rem -.5rem" v-if="couponPage.pageData.length === 0">暂无数据</div>
+            <div class="row" style="margin: 1rem -.5rem" v-if="couponPage.pageData.length === 0">No data</div>
           </div>
           <!-- End Profile Sidebar -->
         </div>
@@ -322,8 +323,5 @@ export default {
 }
 </script>
 
-<style scoped>
-  .cover-wrap .cover img {
-    width: auto;
-  }
+<style>
 </style>

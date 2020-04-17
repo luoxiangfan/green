@@ -5,9 +5,10 @@
     tabindex="-1"
     role="dialog"
     aria-labelledby="exampleModalCenterTitle"
+    @click="$emit('close')"
   >
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+      <div class="modal-content" @click="openModal">
         <div class="modal-body" style="padding: 30px;">
           <button
             type="button"
@@ -19,19 +20,19 @@
             <span aria-hidden="true">×</span>
           </button>
           <div class="row">
-            <div class="col-12 col-md-3 d-flex justify-content-center align-items-center" @click="$emit('close')">
-              <nuxt-link class="cover" v-if="currCouponItem && currCouponItem !== {}" :to="`/store/${currCouponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`">
+            <div class="col-12 col-md-3 d-flex justify-content-center align-items-center">
+              <a class="cover" v-if="currCouponItem && currCouponItem !== {}" :href="`/store/${currCouponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`">
                 <img
                   :alt="currCouponItem.name"
                   :src="`https://cannabispromocodes.com${currCouponItem.storeLogo}`"
                 />
-              </nuxt-link>
-              <nuxt-link class="cover" v-if="couponItem && currCouponItem === undefined && couponItem !== {}" :to="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`">
+              </a>
+              <a class="cover" v-if="couponItem && currCouponItem === undefined && couponItem !== {}" :href="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`">
                 <img
                   :alt="couponItem.storeName"
                   :src="`https://cannabispromocodes.com${couponItem.storeLogo}`"
                 />
-              </nuxt-link>
+              </a>
             </div>
             <div class="text-content col-12 col-md-9" v-if="couponItem && currCouponItem === undefined && couponItem !== {}">
               <p
@@ -43,8 +44,7 @@
                 <a
                   style="color: #269AC8;font-size: 12px;"
                   rel="nofollow"
-                  :href="couponItem.link"
-                  target="_blank"
+                  :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                 >{{ couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '') }}</a>
               </p>
 
@@ -56,7 +56,7 @@
                 </button>
               </div>
               <div class="link-box" v-if="couponItem.couponType === 'DEAL'">
-                <a href="https://www.baidu.com" class="btn" target="_blank">GO TO WEBSITE</a>
+                <a :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite" class="btn">GO TO WEBSITE</a>
               </div>
             </div>
             <div class="text-content col-12 col-md-9" v-if="currCouponItem && currCouponItem !== undefined && currCouponItem !== {}">
@@ -69,8 +69,7 @@
                 <a
                   style="color: #269AC8;font-size: 12px;"
                   rel="nofollow"
-                  :href="currCouponItem.link"
-                  target="_blank"
+                  :href="currCouponItem.link && currCouponItem.link !== '' ? currCouponItem.link : currCouponItem.storeWebSite"
                 >{{ currCouponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '') }}</a>
               </p>
 
@@ -82,7 +81,7 @@
                 </button>
               </div>
               <div class="link-box" v-if="currCouponItem.couponType === 'DEAL'">
-                <a :href="currCouponItem.link" class="btn" target="_blank">GO TO WEBSITE</a>
+                <a :href="currCouponItem.link && currCouponItem.link !== '' ? currCouponItem.link : currCouponItem.storeWebSite" class="btn">GO TO WEBSITE</a>
               </div>
             </div>
           </div>
@@ -124,19 +123,22 @@ export default {
     }
   },
   methods: {
-    copyLink () {
+    copyLink (e) {
       const _this = this;
+      window.event ? window.event.cancelBubble = true : e.stopPropagation();
+      _this.$emit('open')
       const clipboard = this.copyBtn;
-      clipboard.on("success", function () {
+      clipboard.on("success", function (e) {
         _this.$refs.copy.textContent = 'Copied!'
+        e.clearSelection();
       });
+    },
+    openModal (e) {
+      window.event ? window.event.cancelBubble = true : e.stopPropagation();
     }
   }
 };
 </script>
 
-<style scoped>
-  body {
-    overflow: hidden;
-  }
+<style>
 </style>

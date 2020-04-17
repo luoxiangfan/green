@@ -32,6 +32,7 @@
             >
               <div class="cover">
                 <img
+                  class="img-size-width"
                   :src="`https://cannabispromocodes.com${item.logoUrl}`"
                   :alt="`${item.name} coupons`"
                   :title="item.name"
@@ -272,8 +273,5 @@ export default {
 }
 </script>
 
-<style scoped>
-  .cover-wrap .cover img {
-    width: auto;
-  }
+<style>
 </style>

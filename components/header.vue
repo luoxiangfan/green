@@ -201,14 +201,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.show {
-  display: block;
-}
-.hide {
-  display: none;
-}
-.input-group:hover .search-ul {
-  display: block;
-}
+<style>
 </style>
