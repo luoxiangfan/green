@@ -18,6 +18,7 @@
               type="search"
               class="js-search__input form-control"
               placeholder="Search for stores, offers or brands"
+              title="Search for stores, offers or brands"
               data-provide="typeahead"
               autocomplete="off"
               aria-label="Search for stores, offers or brands"
@@ -25,12 +26,11 @@
               id="index_search_input"
               v-model="word"
               @input="querySearch"
-              @focus="querySearch"
-              @blur="showHideSerachList = false"
+              @blur="clearSearchList"
+              @mouseover="reset"
             />
             <ul
-              class="typeahead dropdown-menu search-ul"
-              :class="{ show: showHideSerachList}"
+              class="typeahead dropdown-menu"
               role="listbox"
               style="top: 44px; left: 0px;"
               id="index_search_ul"
@@ -131,7 +131,8 @@
                     />
                   </div>
 
-                  <span class="coupon-label coupon-label--code">{{ item.couponType }}</span>
+                  <span class="coupon-label coupon-label--deal" v-if="item.couponType === 'DEAL'">{{ item.couponType }}</span>
+                  <span class="coupon-label coupon-label--code" v-if="item.couponType === 'CODE'">{{ item.couponType }}</span>
                 </nuxt-link>
               </div>
 
@@ -246,6 +247,7 @@
 </template>
 
 <script>
+import $ from 'jquery';
 export default {
   async asyncData (context) {
     const { data } = await context.$axios.post(
@@ -294,6 +296,11 @@ export default {
         stores: []
       };
     }
+    $('#index_search_input').blur(function () {
+      setTimeout(function () {
+        $('#index_search_ul').hide()
+      }, 700)
+    })
   },
   methods: {
     querySearch () {
@@ -317,9 +324,11 @@ export default {
                 storeTypes: resp.data.data.storeTypes,
                 stores: resp.data.data.stores
               };
+              $('#index_search_ul').show()
               this.showHideSerachList = true;
             } else {
               this.showHideSerachList = false;
+              $('#index_search_ul').hide()
               this.searchData = {
                 storeTypes: [],
                 stores: []
@@ -328,10 +337,23 @@ export default {
           });
       } else {
         this.showHideSerachList = false;
+        $('#index_search_ul').hide()
         this.searchData = {
           storeTypes: [],
           stores: []
         };
+      }
+    },
+    clearSearchList () {
+      this.showHideSerachList = false
+      // this.word = ''
+    },
+    reset () {
+      if (this.word === '') {
+        this.searchData = {
+          storeTypes: [],
+          stores: []
+        }
       }
     }
   }

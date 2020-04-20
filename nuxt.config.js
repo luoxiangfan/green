@@ -48,7 +48,8 @@ export default {
                                                   
         gtag('config', 'UA-106211927-10');`
       }
-    ]
+    ],
+    __dangerouslyDisableSanitizers: ['script']
   },
   /*
   ** Customize the progress-bar color

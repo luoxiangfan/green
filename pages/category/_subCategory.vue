@@ -28,10 +28,11 @@
               <p class="card-title" style="font-size: 1.75rem">Categories</p>
               <div class="card-body">
                 <div class="ml-4">
-                  <p class="font-weight-bold" style="font-size:16px;">{{ $route.params.subCategory }}</p>
+                  <p class="font-weight-bold" style="font-size:16px;" v-if="resData.CategoryName === $route.params.subCategory">{{ resData.CategoryName }}</p>
+                  <nuxt-link :to="`/category/${resData.CategoryName}`" class="font-weight-bold text-dark mb-3 d-block" style="font-size:16px;" v-else>{{ resData.CategoryName }}</nuxt-link>
 
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item" v-for="item in resData.lowerTypes" :key="item.id">
+                    <li class="list-group-item" v-for="item in resData.lowerTypes" :key="item.id" ref="catrgoryList">
                       <nuxt-link :to="`/category/${item.name.replace(/\s/g,'')}`" @click="categoryChange(item)">{{ item.name }}</nuxt-link>
                     </li>
                   </ul>
@@ -180,7 +181,7 @@
 export default {
   name: 'category-subCategory',
   async asyncData (context) {
-    console.log(context)
+    // console.log(context)
     const params = {
       couponType: (context.query.coupon_type && context.query.coupon_type !== null) ? context.query.coupon_type : '',
       typeName: context.params.subCategory,
@@ -202,7 +203,8 @@ export default {
       allActive: false,
       dealActive: false,
       codeActive: false,
-      couponType: ''
+      couponType: '',
+      typeActive: false
     }
   },
   head () {
@@ -216,6 +218,11 @@ export default {
   },
   mounted () {
     console.log(this)
+    this.$refs.catrgoryList.forEach(element => {
+      if (this.$route.params.subCategory === element.textContent.replace(/\s/g, '')) {
+        element.className += ' active'
+      }
+    });
     if (this.$route.query.coupon_type) {
       this.highlightCouponBtn(this.$route.query.coupon_type)
       this.couponType = this.$route.query.coupon_type

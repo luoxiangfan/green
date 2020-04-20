@@ -49,6 +49,7 @@
                     type="search"
                     class="js-search__input form-control"
                     placeholder="Search for stores, offers or brands"
+                    title="Search for stores, offers or brands"
                     data-provide="typeahead"
                     required
                     autocomplete="off"
@@ -57,20 +58,17 @@
                     name="search"
                     v-model="word"
                     @input="querySearch"
-                    @focus="querySearch"
-                    @blur="showHideSerachList = false"
+                    @blur="clearSearchList"
+                    @mouseover="reset"
                   />
                   <input style="display:none" />
                   <ul
                     id="header_search_ul"
-                    class="typeahead dropdown-menu search-ul"
-                    :class="{ show: showHideSerachList}"
+                    class="typeahead dropdown-menu"
                     role="listbox"
                     style="top: 34px; left: 0px;"
                   >
-                    <div
-                      v-if="resData && resData.stores && resData.storeTypes && (resData.stores.length !== 0 || resData.storeTypes.length !== 0)"
-                    >
+                    <div>
                       <li
                         class
                         v-for="item in resData.stores"
@@ -137,6 +135,7 @@
 </template>
 
 <script>
+import $ from 'jquery';
 import { mapState } from "vuex";
 export default {
   name: "GHeader",
@@ -156,7 +155,12 @@ export default {
     })
   },
   mounted () {
-    // console.log(this);
+    // console.log($);
+    $('#header_search_input').blur(function () {
+      setTimeout(function () {
+        $('#header_search_ul').hide()
+      }, 700)
+    })
   },
   methods: {
     querySearch () {
@@ -180,9 +184,11 @@ export default {
                 storeTypes: resp.data.data.storeTypes,
                 stores: resp.data.data.stores
               };
+              $('#header_search_ul').show()
               this.showHideSerachList = true;
             } else {
               this.showHideSerachList = false;
+              $('#header_search_ul').hide()
               this.resData = {
                 storeTypes: [],
                 stores: []
@@ -191,10 +197,25 @@ export default {
           });
       } else {
         this.showHideSerachList = false;
+        $('#header_search_ul').hide()
         this.resData = {
           storeTypes: [],
           stores: []
         };
+      }
+    },
+    clearSearchList () {
+      this.showHideSerachList = false
+      // this.word = ''
+    },
+    reset (e) {
+      window.event ? window.event.cancelBubble = true : e.stopPropagation();
+      if (this.word === '') {
+        this.resData = {
+          storeTypes: [],
+          stores: []
+        }
+        this.showHideSerachList = false
       }
     }
   }

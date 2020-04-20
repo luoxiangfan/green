@@ -105,7 +105,7 @@
                     class="get_code"
                     :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                     :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
-                    target="_blank"
+                    target="_self"
                     rel="nofollow"
                     @click="getDeal(couponItem)"
                   >
@@ -122,19 +122,19 @@
                     </div>
                   </a>
                   <div class="detail-info">
-                    <a
+                    <!-- <a
                       class="get_code"
                       :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                       :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
                       target="_blank"
                       rel="nofollow"
                       @click="getDeal(couponItem)"
-                    ></a>
+                    ></a> -->
                     <a
                       class="get_code"
                       :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
                       :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
-                      target="_blank"
+                      target="_self"
                       rel="nofollow"
                       @click="getDeal(couponItem)"
                     >
@@ -303,11 +303,11 @@ export default {
       // this.dialogVisible = true
       const url = `/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${item.id}`
       // this.$router.push(url)
-      const newWindow = window.open(url)
+      window.open(url)
       if (this.$route.query.c && (item.id === Number(this.$route.query.c))) {
         this.dialogVisible = true
       } else {
-        newWindow.location = url
+        // window.location = url
       }
     },
     showCode (item) {
