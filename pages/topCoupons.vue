@@ -15,13 +15,10 @@
               <div class="pic-box col-3 col-sm-12 d-flex flex-grow-0 justify-content-center">
                 <nuxt-link
                   class="cover-wrap position-relative"
-                  :to="`/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?storeId=${item.storeId}`"
+                  :to="`/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`"
                 >
                   <div class="cover">
-                    <img
-                      :src="`https://cannabispromocodes.com${item.storeLogeUrl}`"
-                      alt="15% Off with Entire Order Site-wide @2Rise Naturals"
-                    />
+                    <img :src="`https://cannabispromocodes.com${item.storeLogeUrl}`" :alt="item.name"/>
                   </div>
 
                   <span class="coupon-label coupon-label--code" v-if="item.couponType === 'CODE'">{{ item.couponType }}</span>
@@ -34,7 +31,7 @@
                   rel="nofollow"
                   :url="item.storeWebSite"
                   class="get_deal coupon-title text-left text-sm-center"
-                  :href="`/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}??storeId=${item.storeId}&c=${item.outSiteCouponId}`"
+                  :href="`/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${item.outSiteCouponId}`"
                 >
                   <p>{{ item.name }}</p>
                 </a>
