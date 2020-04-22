@@ -31,7 +31,7 @@
                   <p class="font-weight-bold" style="font-size:16px;" v-if="resData.CategoryName === $route.params.subCategory">{{ resData.CategoryName }}</p>
                   <nuxt-link :to="`/category/${resData.CategoryName}`" class="font-weight-bold text-dark mb-3 d-block" style="font-size:16px;" v-else>{{ resData.CategoryName }}</nuxt-link>
 
-                  <ul class="list-group list-group-flush">
+                  <ul class="list-group list-group-flush" v-if="resData.lowerTypes && resData.lowerTypes.length !== 0">
                     <li class="list-group-item" v-for="item in resData.lowerTypes" :key="item.id" ref="catrgoryList">
                       <nuxt-link :to="`/category/${item.name.replace(/\s/g,'')}`" @click="categoryChange(item)">{{ item.name }}</nuxt-link>
                     </li>
@@ -220,11 +220,13 @@ export default {
   },
   mounted () {
     console.log(this)
-    this.$refs.catrgoryList.forEach(element => {
-      if (this.$route.params.subCategory === element.textContent.replace(/\s/g, '')) {
-        element.className += ' active'
-      }
-    });
+    if (this.resData.lowerTypes && this.resData.lowerTypes !== 0 && this.$refs.catrgoryList) {
+      this.$refs.catrgoryList.forEach(element => {
+        if (this.$route.params.subCategory === element.textContent.replace(/\s/g, '')) {
+          element.className += ' active'
+        }
+      });
+    }
     if (this.$route.query.coupon_type) {
       this.highlightCouponBtn(this.$route.query.coupon_type)
       this.couponType = this.$route.query.coupon_type
