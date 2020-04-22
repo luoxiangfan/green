@@ -325,6 +325,7 @@ export default {
         if (res && res.data.code === 0) {
           this.couponPage = res.data.data.couponPage
           this.currPageNumber = res.data.data.couponPage.pageNumber
+          this.couponCount = res.data.data.couponPage.count
         }
       })
       // return { couponPage: data.data, currPageNumber: data.data.couponPage.pageData.pageNumber }
