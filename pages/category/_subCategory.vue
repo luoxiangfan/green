@@ -19,7 +19,7 @@
           <div class="col-lg-3 pr-lg-0 d-none d-md-block">
             <div class="card mb-3">
               <div class="coupon-count">
-                <p class="mb-0">{{ resData.couponPage.count }} Offers</p>
+                <p class="mb-0">{{ couponCount }} Offers</p>
               </div>
             </div>
 
@@ -192,7 +192,8 @@ export default {
     return {
       resData: data.data,
       currPageNumber: data.data.couponPage.pageNumber,
-      couponPage: data.data.couponPage
+      couponPage: data.data.couponPage,
+      couponCount: data.data.couponPage.count
     }
   },
   data () {
@@ -204,7 +205,8 @@ export default {
       dealActive: false,
       codeActive: false,
       couponType: '',
-      typeActive: false
+      typeActive: false,
+      couponCount: 0
     }
   },
   head () {
@@ -239,7 +241,10 @@ export default {
         pageSize: 30
       }
       const { data } = await this.$axios.post(`http://47.241.6.230:8080/coupons-management/green/categorys`, params)
-      return { resData: data.data }
+      return {
+        resData: data.data,
+        couponCount: data.data.couponPage.count
+      }
     },
     highlightCouponBtn (type) {
       if (!(this.$route.query.coupon_type) && ((this.codeActive === false) && (this.dealActive === false))) {
@@ -276,6 +281,7 @@ export default {
         if (res && res.data.code === 0) {
           this.couponPage = res.data.data.couponPage
           this.currPageNumber = res.data.data.couponPage.pageNumber
+          this.couponCount = res.data.data.couponPage.count
         }
       })
     },
