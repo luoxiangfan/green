@@ -305,7 +305,6 @@ export default {
       })
     },
     saveCurrCouponItem (item) {
-      console.log(item)
       localStorage.setItem('couponItem', JSON.stringify(item))
       this.$router.push(`/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${item.couponId}`)
     }
