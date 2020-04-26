@@ -17,10 +17,10 @@ export default {
       { name: 'webgains-site-verification', content: 'ambcr9xy' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '/bootstrap.min.css' },
-      { rel: 'stylesheet', href: '/font-awesome.min.css' },
-      { rel: 'stylesheet', href: '/custom.css' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // { rel: 'stylesheet', href: '/bootstrap.min.css' },
+      // { rel: 'stylesheet', href: '/font-awesome.min.css' },
+      // { rel: 'stylesheet', href: '/custom.css' }
     ],
     script: [
       {
@@ -59,6 +59,9 @@ export default {
   ** Global CSS
   */
   css: [
+    '~assets/bootstrap.min.css',
+    '~assets/font-awesome.min.css',
+    '~assets/custom.css'
   ],
   /*
   ** Plugins to load before mounting the App
