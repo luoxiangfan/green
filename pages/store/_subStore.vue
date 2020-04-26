@@ -229,7 +229,7 @@ export default {
       script: [
         {
           type: 'application/ld+json',
-          json: { '@context': 'http://schema.org', '@type': 'WebSite', name: this.storeDetailData.name, description: this.storeDetailData.description, url: this.storeDetailData.webSiteUrl, logo: `https://cannabispromocodes.com${this.storeDetailData.logo}` }
+          json: { '@context': 'http://schema.org', '@type': 'WebSite', name: this.storeDetailData.name, description: this.storeDetailData.description, url: this.storeDetailData.webSiteUrl, image: `https://cannabispromocodes.com${this.storeDetailData.logo}` }
         },
         {
           type: 'application/ld+json',
