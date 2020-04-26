@@ -7,7 +7,7 @@
           <img
             style="width: auto;"
             alt="cannabis coupons - cannabispromocodes.com"
-            src="/img/cannabis.jpg"
+            src="~/assets/img/cannabis.jpg"
           />
         </nuxt-link>
         <!-- End Logo -->

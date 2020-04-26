@@ -102,15 +102,7 @@ export default {
       couponItem: (localStorage.getItem('couponItem') && JSON.parse(localStorage.getItem('couponItem')) && JSON.parse(localStorage.getItem('couponItem')) !== {}) ? JSON.parse(localStorage.getItem('couponItem')) : {}
     };
   },
-  computed: {
-
-  },
   mounted () {
-    console.log(this);
-    // this.currCouponItem = this.couponItem
-    // if (this.currCouponItem.couponType === 'CODE') {
-    //   this.copyBtn = new ClipboardJS(this.$refs.copy);
-    // }
     if (this.couponItem && this.currCouponItem === undefined && this.couponItem.couponType) {
       if (this.couponItem.couponType === 'CODE') {
         this.copyBtn = new ClipboardJS(this.$refs.copy);

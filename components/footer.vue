@@ -9,7 +9,7 @@
               style="height: auto;"
               class="img-fluid logo"
               alt="Cannabis Promo Codes"
-              src="/img/cannabis.jpg"
+              src="~/assets/img/cannabis.jpg"
             />
           </a>
           <!-- <p>Help you get best deal.</p> -->
