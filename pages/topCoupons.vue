@@ -68,7 +68,6 @@ export default {
     const { data } = await context.$axios.post(
       `http://47.241.6.230:8080/coupons-management/green/topCouponlist`
     );
-    console.log(data)
     return { topCouponList: data.data };
   },
   data () {
@@ -80,9 +79,6 @@ export default {
     return {
       title: '绿站'
     }
-  },
-  mounted () {
-    // console.log(this)
   }
 }
 </script>

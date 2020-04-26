@@ -15,7 +15,7 @@
         <div class="row justify-content-center">
           <ul class="paginate-list col-12 d-flex flex-wrap justify-content-lg-center">
             <li v-for="item in storeTypeList" :key="item.id">
-              <nuxt-link exact-active-class="active" :class="`word-${item.value}`" :to="`/store?word=${item.value}`" @click="storeTypeSearch" ref="typeWord">{{ item.value }}</nuxt-link>
+              <nuxt-link exact-active-class="active" :class="`word-${item.value}`" :to="`/store?word=${item.value}`" @click="storeTypeSearch">{{ item.value }}</nuxt-link>
             </li>
           </ul>
         </div>
@@ -60,7 +60,6 @@ export default {
   name: 'store',
   watchQuery: ['word'],
   async asyncData (context) {
-    // console.log(context)
     const params = {
       word: ''
     }
@@ -75,7 +74,6 @@ export default {
       }
     }
     const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/storeList`, params)
-    console.log(data)
     return { resData: data.data.storePageData.pageData, sitePageInfo: data.data.sitePageInfo }
   },
   data () {
@@ -234,10 +232,6 @@ export default {
       ]
     }
   },
-  mounted () {
-    this.bindCalssFn();
-    console.log(this)
-  },
   head () {
     return {
       title: this.sitePageInfo.title,
@@ -256,12 +250,6 @@ export default {
     };
   },
   methods: {
-    bindCalssFn () {
-      // console.log(this.$route)
-      if (this.$route.fullPath === '/store') {
-        this.$refs.typeWord[0].classList += ' active'
-      }
-    },
     async storeTypeSearch () {
       const params = {
         word: this.$route.query.word && this.$route.query.word === 'TOP' ? '' : this.$route.query.word

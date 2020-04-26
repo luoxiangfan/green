@@ -27,10 +27,6 @@
 import { mapState } from "vuex";
 export default {
   name: 'category',
-  // async asyncData (context) {
-  //   const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/storeTypeList`)
-  //   return { resData: data.data }
-  // },
   data () {
     return {
       resData: {},
@@ -41,9 +37,6 @@ export default {
     ...mapState({
       topCategoryList: state => state.category.topCategoryList
     })
-  },
-  mounted () {
-    // console.log(this)
   },
   head () {
     return {

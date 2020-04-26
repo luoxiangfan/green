@@ -122,14 +122,6 @@
                     </div>
                   </a>
                   <div class="detail-info">
-                    <!-- <a
-                      class="get_code"
-                      :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
-                      :url="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${couponItem.id}#get_code_${couponItem.id}`"
-                      target="_blank"
-                      rel="nofollow"
-                      @click="getDeal(couponItem)"
-                    ></a> -->
                     <a
                       class="get_code"
                       :href="couponItem.link && couponItem.link !== '' ? couponItem.link : couponItem.storeWebSite"
@@ -191,18 +183,7 @@ export default {
   components: {
     modal
   },
-  // async asyncData (context) {
-  //   // console.log(context)
-  //   const params = {
-  //     storeId: context.query.storeId
-  //   }
-  //   const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/getTopStores`)
-  //   const { storeDetailData } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/getStoreDetail`, params)
-  //   console.log(storeDetailData)
-  //   return { resData: data.data }
-  // },
   async asyncData (context) {
-    // console.log(context)
     const params = {
       storeWebSite: context.params.subStore
     }
@@ -219,8 +200,6 @@ export default {
       })
     ])
     const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/getTopStores`)
-    // const { storeDetailData } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/getStoreDetail`, params)
-    console.log(data)
     return {
       storeDetailData: res1.data.data,
       couponList: res2.data.data,
@@ -249,14 +228,14 @@ export default {
       ]
     }
   },
-  mounted () {
-    console.log(this)
+  created () {
     if (this.$route.query.coupon_type) {
       this.highlightCouponBtn(this.$route.query.coupon_type)
-      // this.couponType = this.$route.query.coupon_type
     } else {
       this.allActive = true
     }
+  },
+  mounted () {
     this.loadModal()
   },
   methods: {
@@ -292,26 +271,17 @@ export default {
       })
     },
     getDeal (item) {
-      // console.log(item)
       if (localStorage.getItem('couponItem') && JSON.parse(localStorage.getItem('couponItem')) && JSON.parse(localStorage.getItem('couponItem')) !== {}) {
         localStorage.removeItem('couponItem')
       }
       this.currCouponItem = item
-      // this.dialogVisible = true
-      // const url = `/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${item.id}`
-      // this.$router.push(url)
-      // this.dialogVisible = true
       const url = `/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?c=${item.id}`
-      // this.$router.push(url)
       window.open(url)
       if (this.$route.query.c && (item.id === Number(this.$route.query.c))) {
         this.dialogVisible = true
-      } else {
-        // window.location = url
       }
     },
     showCode (item) {
-      // console.log(item)
       this.currCouponItem = item
       this.dialogVisible = true
     },

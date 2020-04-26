@@ -16,21 +16,25 @@
         <div class="flex-grow-1">
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item-top-stores nav-item ml-0 d-none d-lg-inline-block">
-              <div class="nav-link">
-                <nuxt-link
-                  to="/store"
-                  style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;"
-                >Top Stores</nuxt-link>
-              </div>
+              <nuxt-link
+                tag="div"
+                class="nav-link"
+                to="/store"
+                active-class="active"
+              >
+                <a href="" style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;">Top Stores</a>
+              </nuxt-link>
             </li>
 
             <li class="nav-item nav-item-category d-none d-lg-inline-block">
-              <div class="nav-link">
-                <nuxt-link
-                  to="/category"
-                  style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;"
-                >Categories</nuxt-link>
-              </div>
+              <nuxt-link
+                tag="div"
+                class="nav-link"
+                to="/category"
+                active-class="active"
+              >
+                <a href="" style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;">Categories</a>
+              </nuxt-link>
               <ul class="list-group category-list">
                 <nuxt-link
                   v-for="item in topCategoryList.storeTypeList"
@@ -124,10 +128,10 @@
       <!-- for mobile -->
       <div class="container d-flex d-lg-none">
         <nav class="nav mobile-nav">
-          <nuxt-link to="/" class="nav-item-home nav-link">Home</nuxt-link>
-          <nuxt-link to="/store" class="nav-item-top-stores nav-link">Top Stores</nuxt-link>
-          <nuxt-link to="/topCoupons" class="nav-item-top-coupons nav-link">Top Coupons</nuxt-link>
-          <nuxt-link to="/category" class="nav-item-category nav-link">Category</nuxt-link>
+          <nuxt-link to="/" class="nav-item-home nav-link" exact-active-class="active">Home</nuxt-link>
+          <nuxt-link to="/store" class="nav-item-top-stores nav-link" exact-active-class="active">Top Stores</nuxt-link>
+          <nuxt-link to="/topCoupons" class="nav-item-top-coupons nav-link" exact-active-class="active">Top Coupons</nuxt-link>
+          <nuxt-link to="/category" class="nav-item-category nav-link" exact-active-class="active">Category</nuxt-link>
         </nav>
       </div>
     </nav>

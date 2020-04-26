@@ -26,7 +26,6 @@
               id="index_search_input"
               v-model="word"
               @input="querySearch"
-              @blur="clearSearchList"
               @mouseover="reset"
             />
             <ul
@@ -267,7 +266,6 @@ export default {
         storeTypes: [],
         stores: []
       },
-      showHideSerachList: false,
       sitePageInfo: {}
     };
   },
@@ -325,9 +323,7 @@ export default {
                 stores: resp.data.data.stores
               };
               $('#index_search_ul').show()
-              this.showHideSerachList = true;
             } else {
-              this.showHideSerachList = false;
               $('#index_search_ul').hide()
               this.searchData = {
                 storeTypes: [],
@@ -336,17 +332,12 @@ export default {
             }
           });
       } else {
-        this.showHideSerachList = false;
         $('#index_search_ul').hide()
         this.searchData = {
           storeTypes: [],
           stores: []
         };
       }
-    },
-    clearSearchList () {
-      this.showHideSerachList = false
-      // this.word = ''
     },
     reset () {
       if (this.word === '') {

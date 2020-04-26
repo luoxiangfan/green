@@ -32,9 +32,16 @@
                   <nuxt-link :to="`/category/${resData.CategoryName.replace(/\s/g,'')}`" class="font-weight-bold text-dark mb-3 d-block" style="font-size:16px;" v-else>{{ resData.CategoryName }}</nuxt-link>
 
                   <ul class="list-group list-group-flush" v-if="resData.lowerTypes && resData.lowerTypes.length !== 0">
-                    <li class="list-group-item" v-for="item in resData.lowerTypes" :key="item.id" ref="catrgoryList">
-                      <nuxt-link :to="`/category/${item.name.replace(/\s/g,'')}`" @click="categoryChange(item)">{{ item.name }}</nuxt-link>
-                    </li>
+                    <nuxt-link
+                      tag="li"
+                      class="list-group-item"
+                      v-for="item in resData.lowerTypes"
+                      :key="item.id"
+                      :to="`/category/${item.name.replace(/\s/g,'')}`"
+                      exact-active-class="active"
+                    >
+                      <a href="">{{ item.name }}</a>
+                    </nuxt-link>
                   </ul>
 
                   <p class="font-weight-bold mt-3">
@@ -103,13 +110,6 @@
                   </div>
 
                   <div class="info-box col-9 col-sm-12 d-flex flex-wrap align-content-between">
-                    <!-- <nuxt-link
-                      rel="nofollow"
-                      :to="`/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}?storeId=${item.storeId}&c=${item.couponId}`"
-                      class="coupon-title text-left text-sm-center"
-                    >
-                      <h3>{{ item.title }}</h3>
-                    </nuxt-link> -->
                     <div
                       @click="saveCurrCouponItem(item)"
                       class="coupon-title text-left text-sm-center"
@@ -120,7 +120,6 @@
 
                     <div class="extra-info">
                       <span class="use-info">
-                        <!-- <i class="fa fa-user mr-1" aria-hidden="true">12</i> USED -->
                       </span>
                       <span class="d-none d-sm-block">
                         <span class="rate">
@@ -141,23 +140,10 @@
 
               <div class="col-12">
                 <p class="ui-pagination">
-                  <!-- <nuxt-link :to="`/category/${$route.params.subCategory}?page=${currPageNumber}`" id="pre-page" class="disable" @click="couponPagination">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  </nuxt-link> -->
                   <span id="pre-page" class="disable" @click="couponOperation('pre')">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                   </span>
-
                   <span>{{ Number($route.query.page) ? Number($route.query.page) : currPageNumber }} / {{ couponPage.pageCount }}</span>
-
-                  <!-- <nuxt-link
-                    id="next-page"
-                    :to="`/category/${$route.params.subCategory}?page=${currPageNumber}`"
-                    class="active"
-                    @click="couponPagination"
-                  >
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                  </nuxt-link> -->
                   <span
                     id="next-page"
                     class="active"
@@ -181,7 +167,6 @@
 export default {
   name: 'category-subCategory',
   async asyncData (context) {
-    // console.log(context)
     const params = {
       couponType: (context.query.coupon_type && context.query.coupon_type !== null) ? context.query.coupon_type : '',
       typeName: context.params.subCategory,
@@ -219,7 +204,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this)
     if (this.resData.lowerTypes && this.resData.lowerTypes !== 0 && this.$refs.catrgoryList) {
       this.$refs.catrgoryList.forEach(element => {
         if (this.$route.params.subCategory === element.textContent.replace(/\s/g, '')) {
@@ -279,7 +263,6 @@ export default {
       this.couponType = type
       this.$router.push(`/category/${this.$route.params.subCategory}?coupon_type=${type}&page=${params.pageNumber}`)
       this.$axios.post('http://47.241.6.230:8080/coupons-management/green/getCouponPageForType', params).then(res => {
-        console.log(res)
         if (res && res.data.code === 0) {
           this.couponPage = res.data.data.couponPage
           this.currPageNumber = res.data.data.couponPage.pageNumber
@@ -305,15 +288,8 @@ export default {
           this.currPageNumber = this.couponPage.pageCount;
         }
       }
-      // if (this.$route.query.coupon_type) {
-      //   couponType = this.$route.query.coupon_type
-      // } else {
-      //   couponType = ''
-      // }
-      // this.couponType = couponType
       this.highlightCouponBtn(this.couponType)
       this.$router.push(`/category/${this.$route.params.subCategory}?coupon_type=${this.couponType}&page=${this.currPageNumber}`)
-      // this.currPageNumber = Number(this.$route.query.page)
       const params = {
         couponType: this.couponType,
         typeName: this.$route.params.subCategory,
@@ -321,14 +297,12 @@ export default {
         pageSize: 30
       }
       this.$axios.post('http://47.241.6.230:8080/coupons-management/green/getCouponPageForType', params).then(res => {
-        console.log(res)
         if (res && res.data.code === 0) {
           this.couponPage = res.data.data.couponPage
           this.currPageNumber = res.data.data.couponPage.pageNumber
           this.couponCount = res.data.data.couponPage.count
         }
       })
-      // return { couponPage: data.data, currPageNumber: data.data.couponPage.pageData.pageNumber }
     },
     saveCurrCouponItem (item) {
       console.log(item)

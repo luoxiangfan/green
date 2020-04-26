@@ -45,9 +45,6 @@ export default {
         { hid: 'keywords', name: 'keywords', content: this.contact.sitePageInfo.keyWords }
       ]
     }
-  },
-  mounted () {
-    // console.log(this)
   }
 }
 </script>
