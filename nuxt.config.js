@@ -21,35 +21,7 @@ export default {
       // { rel: 'stylesheet', href: '/bootstrap.min.css' },
       // { rel: 'stylesheet', href: '/font-awesome.min.css' },
       // { rel: 'stylesheet', href: '/custom.css' }
-    ],
-    script: [
-      {
-        src: 'https://www.googletagmanager.com/gtag/js?id=UA-106211927-10',
-        async: true
-      },
-      {
-        src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-        async: true
-      },
-      {
-        innerHTML: `
-        (adsbygoogle = window.adsbygoogle || []).push({ 
-          google_ad_client: 'ca-pub-2669162039689132',
-          enable_page_level_ads: true                 
-        });`
-      },
-      {
-        innerHTML: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {                         
-            dataLayer.push(arguments);            
-        }                                         
-        gtag('js', new Date());                   
-                                                  
-        gtag('config', 'UA-106211927-10');`
-      }
-    ],
-    __dangerouslyDisableSanitizers: ['script']
+    ]
   },
   /*
   ** Customize the progress-bar color

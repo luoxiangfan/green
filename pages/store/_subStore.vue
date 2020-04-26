@@ -225,6 +225,16 @@ export default {
       meta: [
         { hid: 'description', name: 'description', content: this.storeDetailData.description },
         { hid: 'keywords', name: 'keywords', content: this.storeDetailData.keyWords }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          json: { '@context': 'http://schema.org', '@type': 'WebSite', name: this.storeDetailData.name, title: this.storeDetailData.title, keywords: this.storeDetailData.keyWords, description: this.storeDetailData.description, url: this.storeDetailData.webSiteUrl, logo: this.storeDetailData.logo }
+        },
+        {
+          type: 'application/ld+json',
+          json: { '@context': 'http://schema.org', '@type': 'Organization', name: this.storeDetailData.name, title: this.storeDetailData.title, keywords: this.storeDetailData.keyWords, description: this.storeDetailData.description, url: this.storeDetailData.webSiteUrl, logo: this.storeDetailData.logo }
+        }
       ]
     }
   },
