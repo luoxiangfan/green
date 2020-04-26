@@ -11,7 +11,7 @@
               <a class="cover" :href="(storeDetailData.Advertising !== null && storeDetailData.Advertising !== '') ? storeDetailData.Advertising : storeDetailData.webSiteUrl" target="_blank" rel="nofollow">
                 <img
                   class="img-fluid img-size-all"
-                  :src="storeDetailData.logo"
+                  :src="`https://cannabispromocodes.com${storeDetailData.logo}`"
                   :alt="`${storeDetailData.name} coupons`"
                 />
               </a>
@@ -69,7 +69,7 @@
                         class="img-fluid img-size-all"
                         style="height: 100%;max-width: 100%;max-height: 100%;"
                         :alt="`${item.name} coupons`"
-                        :src="item.logoUrl"
+                        :src="`https://cannabispromocodes.com${item.logoUrl}`"
                       />
                     </div>
                   </nuxt-link>
