@@ -10,8 +10,10 @@
             <div class="store-brand cover-wrap">
               <a class="cover" :href="(storeDetailData.Advertising !== null && storeDetailData.Advertising !== '') ? storeDetailData.Advertising : storeDetailData.webSiteUrl" target="_blank" rel="nofollow">
                 <img
+                  v-lazyload
                   class="img-fluid img-size-all"
                   :src="`https://cannabispromocodes.com${storeDetailData.logo}`"
+                  :data-src="`https://cannabispromocodes.com${storeDetailData.logo}`"
                   :alt="`${storeDetailData.name} coupons`"
                 />
               </a>
@@ -66,10 +68,12 @@
                   >
                     <div class="cover">
                       <img
+                        v-lazyload
                         class="img-fluid img-size-all"
                         style="height: 100%;max-width: 100%;max-height: 100%;"
                         :alt="`${item.name} coupons`"
                         :src="`https://cannabispromocodes.com${item.logoUrl}`"
+                        :data-src="`https://cannabispromocodes.com${item.logoUrl}`"
                       />
                     </div>
                   </nuxt-link>

@@ -32,8 +32,10 @@
             >
               <div class="cover">
                 <img
+                  v-lazyload
                   class="img-size-width"
                   :src="`https://cannabispromocodes.com${item.logoUrl}`"
+                  :data-src="`https://cannabispromocodes.com${item.logoUrl}`"
                   :alt="`${item.name} coupons`"
                   :title="item.name"
                 />
