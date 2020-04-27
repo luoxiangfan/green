@@ -203,14 +203,7 @@ export default {
       ]
     }
   },
-  mounted () {
-    if (this.resData.lowerTypes && this.resData.lowerTypes !== 0 && this.$refs.catrgoryList) {
-      this.$refs.catrgoryList.forEach(element => {
-        if (this.$route.params.subCategory === element.textContent.replace(/\s/g, '')) {
-          element.className += ' active'
-        }
-      });
-    }
+  created () {
     if (this.$route.query.coupon_type) {
       this.highlightCouponBtn(this.$route.query.coupon_type)
       this.couponType = this.$route.query.coupon_type

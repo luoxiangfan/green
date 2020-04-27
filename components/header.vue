@@ -15,26 +15,30 @@
         <!-- Navigation -->
         <div class="flex-grow-1">
           <ul class="navbar-nav justify-content-end">
-            <li class="nav-item-top-stores nav-item ml-0 d-none d-lg-inline-block">
-              <nuxt-link
-                tag="div"
-                class="nav-link"
-                to="/store"
-                active-class="active"
-              >
+            <!-- <li class="nav-item-top-stores nav-item ml-0 d-none d-lg-inline-block">
+            </li> -->
+            <nuxt-link
+              tag="li"
+              class="nav-item-top-stores nav-item ml-0 d-none d-lg-inline-block"
+              to="/store"
+              active-class="active"
+            >
+              <div class="nav-link">
                 <a href="" style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;">Top Stores</a>
-              </nuxt-link>
-            </li>
+              </div>
+            </nuxt-link>
 
             <li class="nav-item nav-item-category d-none d-lg-inline-block">
-              <nuxt-link
+              <!-- <nuxt-link
                 tag="div"
                 class="nav-link"
                 to="/category"
                 active-class="active"
               >
-                <a href="" style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;">Categories</a>
-              </nuxt-link>
+                <div class="nav-link">
+                  <a href="" style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;">Categories</a>
+                </div>
+              </nuxt-link> -->
               <ul class="list-group category-list">
                 <nuxt-link
                   v-for="item in topCategoryList.storeTypeList"
@@ -44,7 +48,24 @@
                 >{{ item.name }}</nuxt-link>
               </ul>
             </li>
-
+            <nuxt-link
+              tag="li"
+              class="nav-item nav-item-category d-none d-lg-inline-block"
+              to="/category"
+              active-class="active"
+            >
+              <div class="nav-link">
+                <a href="" style="text-decoration: none;color: #151515;font-size: 15px;font-weight: 500;">Categories</a>
+              </div>
+              <ul class="list-group category-list">
+                <nuxt-link
+                  v-for="item in topCategoryList.storeTypeList"
+                  :key="item.id"
+                  :to="`/category/${item.name.replace(' ', '')}`"
+                  class="list-group-item list-group-item-action"
+                >{{ item.name }}</nuxt-link>
+              </ul>
+            </nuxt-link>
             <li class="nav-item nav-item__search">
               <form class="js-head-search-form">
                 <!-- Search Field -->
