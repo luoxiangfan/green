@@ -250,7 +250,7 @@ import $ from 'jquery';
 export default {
   async asyncData (context) {
     const { data } = await context.$axios.post(
-      `http://47.241.6.230:8080/coupons-management/green/index`
+      `green/index`
     );
     return {
       resData: data,
@@ -306,7 +306,7 @@ export default {
       if (params.keys && params.keys !== "") {
         this.$axios
           .post(
-            "http://47.241.6.230:8080/coupons-management/green/getSearch",
+            "green/getSearch",
             params
           )
           .then(resp => {

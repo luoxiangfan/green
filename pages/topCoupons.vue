@@ -66,7 +66,7 @@ export default {
   name: 'topCoupons',
   async asyncData (context) {
     const { data } = await context.$axios.post(
-      `http://47.241.6.230:8080/coupons-management/green/topCouponlist`
+      `green/topCouponlist`
     );
     return { topCouponList: data.data };
   },

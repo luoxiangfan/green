@@ -75,7 +75,7 @@ export default {
         params.word = context.query.word
       }
     }
-    const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/storeList`, params)
+    const { data } = await context.$axios.post(`green/storeList`, params)
     return { resData: data.data.storePageData.pageData, sitePageInfo: data.data.sitePageInfo }
   },
   data () {
@@ -256,7 +256,7 @@ export default {
       const params = {
         word: this.$route.query.word && this.$route.query.word === 'TOP' ? '' : this.$route.query.word
       }
-      const { data } = await this.$axios.post(`http://47.241.6.230:8080/coupons-management/green/storeList`, params)
+      const { data } = await this.$axios.post(`green/storeList`, params)
       return { resData: data.data.storePageData.pageData }
     }
   }

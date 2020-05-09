@@ -29,7 +29,7 @@ export default {
     }
   },
   async asyncData (context) {
-    const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/aboutUs`)
+    const { data } = await context.$axios.post(`green/aboutUs`)
     return { about: data.data }
   },
   data () {

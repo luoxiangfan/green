@@ -8,7 +8,7 @@
           <div class="col-lg-2 col-md-3 col-5 d-flex align-items-center">
             <!-- Store Image -->
             <div class="store-brand cover-wrap">
-              <a class="cover" :href="(storeDetailData.Advertising !== null && storeDetailData.Advertising !== '') ? storeDetailData.Advertising : storeDetailData.webSiteUrl" target="_blank" rel="nofollow">
+              <a class="cover" :href="(storeDetailData.Advertising && storeDetailData.Advertising !== null && storeDetailData.Advertising !== '') ? storeDetailData.Advertising : storeDetailData.webSiteUrl" target="_blank" rel="nofollow">
                 <img
                   v-lazyload
                   class="img-fluid img-size-all"
@@ -196,14 +196,14 @@ export default {
       couponType: (context.query.coupon_type && context.query.coupon_type !== null) ? context.query.coupon_type : ''
     }
     const [res1, res2] = await Promise.all([
-      context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/StoreDetail`, params).then(res => {
+      context.$axios.post(`green/StoreDetail`, params).then(res => {
         return res
       }),
-      context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/getStoreCouponList`, couponParams).then(res => {
+      context.$axios.post(`green/getStoreCouponList`, couponParams).then(res => {
         return res
       })
     ])
-    const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/getTopStores`)
+    const { data } = await context.$axios.post(`green/getTopStores`)
     return {
       storeDetailData: res1.data.data,
       couponList: res2.data.data,

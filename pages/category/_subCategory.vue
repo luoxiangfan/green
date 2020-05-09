@@ -173,7 +173,7 @@ export default {
       pageNumber: (context.query.page && context.query.page !== '') ? context.query.page : 1,
       pageSize: 30
     }
-    const { data } = await context.$axios.post(`http://47.241.6.230:8080/coupons-management/green/categorys`, params)
+    const { data } = await context.$axios.post(`green/categorys`, params)
     return {
       resData: data.data,
       currPageNumber: data.data.couponPage.pageNumber,
@@ -219,7 +219,7 @@ export default {
         pageNumber: 1,
         pageSize: 30
       }
-      const { data } = await this.$axios.post(`http://47.241.6.230:8080/coupons-management/green/categorys`, params)
+      const { data } = await this.$axios.post(`green/categorys`, params)
       return {
         resData: data.data,
         couponCount: data.data.couponPage.count
@@ -255,7 +255,7 @@ export default {
       }
       this.couponType = type
       this.$router.push(`/category/${this.$route.params.subCategory}?coupon_type=${type}&page=${params.pageNumber}`)
-      this.$axios.post('http://47.241.6.230:8080/coupons-management/green/getCouponPageForType', params).then(res => {
+      this.$axios.post('green/getCouponPageForType', params).then(res => {
         if (res && res.data.code === 0) {
           this.couponPage = res.data.data.couponPage
           this.currPageNumber = res.data.data.couponPage.pageNumber
@@ -289,7 +289,7 @@ export default {
         pageNumber: this.currPageNumber,
         pageSize: 30
       }
-      this.$axios.post('http://47.241.6.230:8080/coupons-management/green/getCouponPageForType', params).then(res => {
+      this.$axios.post('green/getCouponPageForType', params).then(res => {
         if (res && res.data.code === 0) {
           this.couponPage = res.data.data.couponPage
           this.currPageNumber = res.data.data.couponPage.pageNumber

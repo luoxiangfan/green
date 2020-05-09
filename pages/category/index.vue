@@ -27,12 +27,6 @@
 import { mapState } from "vuex";
 export default {
   name: 'category',
-  data () {
-    return {
-      resData: {},
-      baseUrl: 'http://47.241.6.230:8080/coupons-management/'
-    }
-  },
   computed: {
     ...mapState({
       topCategoryList: state => state.category.topCategoryList
