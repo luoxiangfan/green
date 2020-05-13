@@ -21,9 +21,9 @@
           </div>
           <div class="col-lg-8 col-md-9 col-7 d-flex d-lg-block align-items-center">
             <h1 class="store-name">{{ storeDetailData.showName }}</h1>
-            <p class="store-description d-none d-lg-block">{{ storeDetailData.storeDescription }}</p>
+            <p class="store-description d-none d-lg-block" v-if="isMobile === false">{{ storeDetailData.storeDescription }}</p>
 
-            <div class="d-none d-lg-block">
+            <div class="d-none d-lg-block" v-if="isMobile === false">
               <span class="store-info-item">
                 <em>{{ storeDetailData.couponTotal }}</em> Offers Available
               </span>
@@ -40,7 +40,7 @@
             </div>
             <!-- Project Progress -->
           </div>
-          <div class="col-lg-2 d-none d-lg-flex align-items-end justify-content-end">
+          <div class="col-lg-2 d-none d-lg-flex align-items-end justify-content-end" v-if="isMobile === false">
             <a class="visit-btn" :href="storeDetailData.Advertising" target="_blank" rel="nofollow">Visit Website</a>
           </div>
         </div>
@@ -51,7 +51,7 @@
       <div class="container">
         <div class="row">
           <!-- left side -->
-          <div class="col-lg-3 col-12 pr-lg-0 d-none d-lg-block">
+          <div class="col-lg-3 col-12 pr-lg-0 d-none d-lg-block" v-if="isMobile === false">
             <!-- Panel Header -->
             <div class="card top-store-card">
               <p
@@ -60,7 +60,7 @@
 
               <!-- Panel Body -->
               <div class="row">
-                <div class="col-6 p-2" v-for="item in resData" :key="item.id">
+                <div class="col-6 p-2" v-for="item in topStoreList" :key="item.id">
                   <nuxt-link
                     class="cover-wrap store-item"
                     style="max-height: 100px"
@@ -91,10 +91,10 @@
               <div class="col-12 choice">
                 <button id="type_all" class="btn btn-sm btn-all" :class="{'btn-active': allActive}" @click="selectCoupon('')">
                   All
-                  <span class="d-none d-md-inline">Offers</span>
+                  <span class="d-none d-md-inline" v-if="isMobile === false">Offers</span>
                 </button>
                 <button id="type_code" class="btn btn-sm btn-code" :class="{'btn-active': codeActive}" @click="selectCoupon('CODE')">
-                  <span class="d-none d-md-inline">Coupon</span>Codes
+                  <span class="d-none d-md-inline" v-if="isMobile === false">Coupon</span>Codes
                 </button>
                 <button id="type_deal" class="btn btn-sm btn-deal" :class="{'btn-active': dealActive}" @click="selectCoupon('DEAL')">Deals</button>
               </div>
@@ -203,11 +203,19 @@ export default {
         return res
       })
     ])
-    const { data } = await context.$axios.post(`green/getTopStores`)
+    // const { data } = await context.$axios.post(`green/getTopStores`)
     return {
       storeDetailData: res1.data.data,
-      couponList: res2.data.data,
-      resData: data.data
+      couponList: res2.data.data
+      // resData: data.data
+    }
+  },
+  computed: {
+    topStoreList () {
+      return this.$store.state.store.topStoreList
+    },
+    isMobile () {
+      return this.$store.state.global.isMobile
     }
   },
   data () {
@@ -280,7 +288,7 @@ export default {
         couponType: type
       }
       this.$router.push(`/store/${this.$route.params.subStore}?coupon_type=${type}`)
-      this.$axios.post(`http://47.241.6.230:8080/coupons-management/green/getStoreCouponList`, params).then(res => {
+      this.$axios.post(`green/getStoreCouponList`, params).then(res => {
         this.couponList = res.data.data
       })
     },

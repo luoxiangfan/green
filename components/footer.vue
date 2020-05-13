@@ -71,7 +71,7 @@
         <div class="row">
           <div class="col-8 col-md-6 px-0 px-md-4">
             <div class="text-right">
-              <small class>Copyright @ 2019. All Rights Reserved.</small>
+              <small class>Copyright @ 2019-2022. All Rights Reserved.</small>
             </div>
           </div>
 

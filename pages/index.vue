@@ -84,7 +84,7 @@
           <div
             class="col-6 col-md-4 col-lg-5-1 p-2"
             style="height: 187px"
-            v-for="item in resData.data.RMstore"
+            v-for="item in homePageData.RMstore"
             :key="item.id"
           >
             <nuxt-link
@@ -113,7 +113,7 @@
         <div class="row">
           <div
             class="col-12 col-sm-6 col-md-4 col-lg-3 px-2 py-0 py-sm-2"
-            v-for="item in resData.data.RMcoupon"
+            v-for="item in homePageData.RMcoupon"
             :key="item.id"
           >
             <div class="coupon-item row no-gutters">
@@ -186,7 +186,7 @@
           <div class="row">
             <div
               class="col-12 col-sm-4 col-md-3 col-lg-2 p-sm-2"
-              v-for="item in resData.data.storeType"
+              v-for="item in homePageData.storeType"
               :key="item.id"
             >
               <div class="category-item">
@@ -226,7 +226,7 @@
           <div class="row">
             <div
               class="store-name-wrap col-12 col-md-4 col-lg-5-1 mb-3 mb-md-4"
-              v-for="item in resData.data.TJstore"
+              v-for="item in homePageData.TJstore"
               :key="item.id"
             >
               <nuxt-link
@@ -248,39 +248,33 @@
 <script>
 import $ from 'jquery';
 export default {
-  async asyncData (context) {
-    const { data } = await context.$axios.post(
-      `green/index`
-    );
-    return {
-      resData: data,
-      sitePageInfo: data.data.sitePageInfo
-    };
+  computed: {
+    homePageData () {
+      return this.$store.state.global.homePageData
+    }
   },
   data () {
     return {
-      resData: {},
       word: "",
       searchData: {
         storeTypes: [],
         stores: []
-      },
-      sitePageInfo: {}
+      }
     };
   },
   head () {
     return {
-      title: this.sitePageInfo.title,
+      title: this.homePageData.sitePageInfo.title,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: this.sitePageInfo.description
+          content: this.homePageData.sitePageInfo.description
         },
         {
           hid: "keywords",
           name: "keywords",
-          content: this.sitePageInfo.keyWords
+          content: this.homePageData.sitePageInfo.keyWords
         }
       ]
     };
