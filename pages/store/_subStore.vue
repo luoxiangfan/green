@@ -238,6 +238,9 @@ export default {
         { hid: 'description', name: 'description', content: this.storeDetailData.description },
         { hid: 'keywords', name: 'keywords', content: this.storeDetailData.keyWords }
       ],
+      link: [
+        { rel: 'canonical', href: `${this.basePath}${this.$route.path}` }
+      ],
       script: [
         {
           type: 'application/ld+json',
@@ -258,6 +261,7 @@ export default {
     }
   },
   mounted () {
+    this.basePath = window.location.origin
     this.loadModal()
   },
   methods: {
