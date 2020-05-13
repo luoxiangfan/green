@@ -222,6 +222,7 @@ export default {
     return {
       dialogVisible: false,
       resData: {},
+      basePath: '',
       storeDetailData: {},
       couponList: [],
       couponSelectList: {},
