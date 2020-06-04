@@ -1,6 +1,6 @@
 [
   {
-    "name": "tcc",
+    "name": "green",
     "script": "npm run start",
     "env_dev": {
       "NODE_ENV": "development"
