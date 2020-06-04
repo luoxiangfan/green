@@ -99,7 +99,7 @@
                       <div class="cover">
                         <img
                           class="img-size-width"
-                          :src="`https://cannabispromocodes.com${item.storeLogo}`"
+                          :src="item.storeLogo"
                           :alt="`${item.storeName} coupons`"
                         />
                       </div>

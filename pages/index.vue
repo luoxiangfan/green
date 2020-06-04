@@ -42,7 +42,7 @@
                   >
                     <div class="typeahead search-result">
                       <div class="img-text-wrap">
-                        <img :src="`https://cannabispromocodes.com${item.logoUrl}`" class="pic" />
+                        <img :src="item.logoUrl" class="pic" />
                         <div>
                           <strong>{{ item.name }}</strong> -- Store
                         </div>
@@ -93,7 +93,7 @@
             >
               <div class="cover">
                 <img
-                  :src="`https://cannabispromocodes.com${item.logoUrl}`"
+                  :src="item.logoUrl"
                   class="align-self-center img-size-width"
                   :alt="`${item.name} coupons`"
                   :title="item.name"
@@ -125,7 +125,7 @@
                   <div class="cover">
                     <img
                       class="img-size-width"
-                      :src="`https://cannabispromocodes.com${item.storeLogeUrl}`"
+                      :src="item.storeLogeUrl"
                       :alt="`${item.storeName} coupons`"
                     />
                   </div>

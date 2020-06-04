@@ -18,7 +18,7 @@
                   :to="`/store/${item.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`"
                 >
                   <div class="cover">
-                    <img :src="`https://cannabispromocodes.com${item.storeLogeUrl}`" :alt="item.name"/>
+                    <img :src="item.storeLogeUrl" :alt="item.name"/>
                   </div>
 
                   <span class="coupon-label coupon-label--code" v-if="item.couponType === 'CODE'">{{ item.couponType }}</span>

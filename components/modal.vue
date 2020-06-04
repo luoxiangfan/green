@@ -24,13 +24,13 @@
               <a class="cover" v-if="currCouponItem && currCouponItem !== {}" :href="`/store/${currCouponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`">
                 <img
                   :alt="currCouponItem.name"
-                  :src="`https://cannabispromocodes.com${currCouponItem.storeLogo}`"
+                  :src="currCouponItem.storeLogo"
                 />
               </a>
               <a class="cover" v-if="couponItem && currCouponItem === undefined && couponItem !== {}" :href="`/store/${couponItem.storeWebSite.replace('http://', '').replace('www.', '').replace('https://', '')}`">
                 <img
                   :alt="couponItem.storeName"
-                  :src="`https://cannabispromocodes.com${couponItem.storeLogo}`"
+                  :src="couponItem.storeLogo"
                 />
               </a>
             </div>

@@ -107,7 +107,7 @@
                           <div class="typeahead search-result">
                             <div class="img-text-wrap">
                               <img
-                                :src="`https://cannabispromocodes.com${item.logoUrl}`"
+                                :src="item.logoUrl"
                                 class="pic"
                               />
                               <div>

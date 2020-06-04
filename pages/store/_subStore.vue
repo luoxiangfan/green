@@ -12,8 +12,8 @@
                 <img
                   v-lazyload
                   class="img-fluid img-size-all"
-                  :src="`https://cannabispromocodes.com${storeDetailData.logo}`"
-                  :data-src="`https://cannabispromocodes.com${storeDetailData.logo}`"
+                  :src="storeDetailData.logo"
+                  :data-src="storeDetailData.logo"
                   :alt="`${storeDetailData.name} coupons`"
                 />
               </a>
@@ -72,8 +72,8 @@
                         class="img-fluid img-size-all"
                         style="height: 100%;max-width: 100%;max-height: 100%;"
                         :alt="`${item.name} coupons`"
-                        :src="`https://cannabispromocodes.com${item.logoUrl}`"
-                        :data-src="`https://cannabispromocodes.com${item.logoUrl}`"
+                        :src="item.logoUrl"
+                        :data-src="item.logoUrl"
                       />
                     </div>
                   </nuxt-link>

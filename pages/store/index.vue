@@ -34,8 +34,8 @@
                 <img
                   v-lazyload
                   class="img-size-width"
-                  :src="`https://cannabispromocodes.com${item.logoUrl}`"
-                  :data-src="`https://cannabispromocodes.com${item.logoUrl}`"
+                  :src="item.logoUrl"
+                  :data-src="item.logoUrl"
                   :alt="`${item.name} coupons`"
                   :title="item.name"
                 />
